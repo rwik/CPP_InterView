@@ -1,0 +1,25 @@
+#include <iostream>
+
+using namespace std;
+
+int minimum(int arr[],int low,int high)
+{
+
+    if(high == low) return arr[low];
+    int mid = (high+low)/2;
+    if(mid>low && arr[mid]<arr[mid-1] )//check if mid is lowest
+        return arr[mid];
+
+    //decide whether to go left or right
+    if(arr[high]>arr[mid])
+        return minimum(arr,low,mid-1);
+    return minimum(arr,mid+1,high);
+
+}
+int main()
+{
+    int arr[] = {5,6,1,2,3,4};
+    int high = sizeof(arr)/ sizeof(arr[0]);
+    cout<<" minimum = "<<minimum(arr,0,high);
+    return 0;
+}

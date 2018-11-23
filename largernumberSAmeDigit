@@ -1,0 +1,66 @@
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+int main()
+{
+    int n = 123;
+
+    cout<<" input = "<<n<<endl;
+    int tempArr[10];
+    std::fill(tempArr,tempArr+10,11);
+    int k;
+    int length=0;
+    int temp = n;
+    int mark;
+    for(k=0;k<10;k++)
+    {
+        if (temp == 0)
+            break;
+        tempArr[k] = temp %10;
+        temp =temp/10;
+        length++;
+
+    }
+    cout<<"~~~"<<endl;
+    for(int i = 0; i< 10; i++)
+    {
+        cout<<tempArr[i]<<endl;
+    }
+    int found = 1;
+    for(int i =0;i<length-1;i++)
+    {
+        for(k=i+1;k<length;k++)
+        {
+            if(found == 0)
+                break;
+            if(tempArr[i]>tempArr[k])
+            {
+                int stemp=tempArr[k];
+                mark = i;
+                tempArr[k]=tempArr[mark];
+                tempArr[mark]=stemp;
+                found = 0;
+                break;
+
+            }
+
+        }
+
+
+    }
+
+     cout<<"~~~"<<endl;
+
+    int result =0;
+
+    for(int i = 0; i< length; i++)
+    {
+        result = result + tempArr[i]*(pow(10,i));
+    }
+    cout<<result;
+    return 0;
+}
+
+

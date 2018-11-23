@@ -1,0 +1,78 @@
+#include <iostream>
+
+using namespace std;
+//command design pattern
+
+
+class command
+{
+public:
+    virtual void execute() = 0;
+    virtual ~command(){}
+
+};
+
+
+class Receiver
+{
+public :
+    void action()
+    {
+        cout<<" command executed "<<endl;
+    }
+
+};
+
+class concreteCommand:public command
+{
+    Receiver *_r;
+public:
+    concreteCommand(Receiver *r = 0) :_r(r)
+    {}
+    void setReceiver(Receiver *r = 0)
+    {
+        _r = r;
+    }
+    virtual void execute()
+    {
+        if(0!=_r)
+        {
+            _r->action();
+        }
+    }
+    virtual ~concreteCommand()
+    {}
+};
+
+class invoker
+{
+    command *_c;
+public:
+    invoker(command* c):_c(c)
+    {}
+    void setCommand(command *c=0)
+    {
+        _c=c;
+    }
+    void invoke()
+    {
+        if(0!=_c)
+        {
+            _c->execute();
+        }
+    }
+
+};
+
+
+
+
+
+int main()
+{
+    Receiver r;
+    concreteCommand c(&r);
+    invoker i(&c);
+    i.invoke();
+    return 0;
+}
